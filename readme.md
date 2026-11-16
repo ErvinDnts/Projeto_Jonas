@@ -1,24 +1,32 @@
-SISTEMA DE GERENCIAMENTO DE VENDAS E NEGÓCIOS
+  SISTEMA DE GERENCIAMENTO DE VENDAS E NEGÓCIOS
 
-[Descrever o sistema proposto na primeira entrega, seu público-alvo e o problema de negócio que pretende resolver.]
+O projeto propõe um sistema de gestão de vendas e encomendas para uma empresa de produtos personalizados destinados a aniversários, casamentos e eventos. Desenvolvido em Java com Spring Boot, o sistema busca centralizar as informações que atualmente estão espalhadas entre mensagens, redes sociais e atendimentos presenciais, evitando registros duplicados e falhas de comunicação.
 
-**Status:** repositório criado para a segunda etapa. A implementação das entidades e a documentação do domínio estão pendentes.
+O público-alvo são os colaboradores de atendimento, produção, administração e entrega, além do proprietário, que precisa acompanhar o andamento das encomendas e a situação do negócio.
 
-**Sobre o projeto**
+Os principais problemas a serem enfrentados são a perda de alterações solicitadas pelos clientes, a falta de visibilidade sobre o andamento dos pedidos, os atrasos decorrentes de prazos incompatíveis com a capacidade de produção, a falta ou o excesso de materiais e a dificuldade de conferir sinais, pagamentos parciais e saldos pendentes.
+
+A proposta é organizar o registro das encomendas, incluindo personalização, quantidade, materiais, prazo e valores; acompanhar suas alterações e etapas de produção; apoiar o controle de materiais; e registrar os pagamentos e os saldos devidos. Com informações centralizadas, a empresa poderá responder aos clientes com mais segurança, reduzir falhas operacionais e melhorar o planejamento das vendas, da produção e das entregas.
+
+O escopo inicial deverá ser priorizado e validado pela equipe com o cliente, buscando uma solução simples e acessível. Nesta segunda etapa, o foco será modelar esse domínio por meio das entidades, dos atributos, dos relacionamentos JPA e dos comportamentos de negócio, além de documentar o diagrama UML e a arquitetura escolhida.
+
+Status: repositório criado para a segunda etapa. A implementação das entidades e a documentação do domínio estão pendentes.
+
+  Sobre o proeto:
 
 Este repositório reúne o código-fonte e a documentação do sistema desenvolvido pela equipe.
 
 A segunda etapa tem como objetivo implementar a modelagem do domínio definida na primeira entrega, representar as entidades em um diagrama de classes UML e documentar a arquitetura do projeto.
 
-O foco desta entrega é o domínio: entidades, atributos, relacionamentos e comportamentos que modificam seu estado. **Não é necessário implementar Controllers, Services ou endpoints nesta etapa.**
+O foco desta entrega é o domínio: entidades, atributos, relacionamentos e comportamentos que modificam seu estado. Não é necessário implementar Controllers, Services ou endpoints nesta etapa.
 
 **Checklist da segunda etapa**
 
 **Repositório e colaboração**
 
 - [x] Criar o repositório.
-- [ ] Adicionar este documento como `README.md`.
-- [ ] Garantir que todos os integrantes tenham acesso ao repositório.
+- [x] Adicionar este documento como `README.md`.
+- [x] Garantir que todos os integrantes tenham acesso ao repositório.
 - [ ] Disponibilizar todo o código desenvolvido no GitHub.
 - [ ] Configurar o `.gitignore` conforme as ferramentas utilizadas.
 
@@ -38,12 +46,6 @@ O foco desta entrega é o domínio: entidades, atributos, relacionamentos e comp
 - [ ] Disponibilizar o diagrama no repositório como imagem, PDF ou arquivo de modelagem.
 - [ ] Validar a arquitetura proposta com a equipe.
 - [ ] Documentar os pré-requisitos e os comandos reais de execução.
-
-**Entrega no Google Sala de Aula**
-
-- [ ] Enviar o link do repositório GitHub com o código atualizado.
-- [ ] Entregar o diagrama de classes UML.
-- [ ] Garantir que a justificativa da arquitetura esteja registrada neste README.
 
 **Escopo desta entrega**
 
