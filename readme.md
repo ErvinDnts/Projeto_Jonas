@@ -29,7 +29,7 @@ O foco desta entrega é o domínio: entidades, atributos, relacionamentos e comp
 - [x] Garantir que todos os integrantes tenham acesso ao repositório.
 - [ ] Disponibilizar todo o código desenvolvido no GitHub.
 - [ ] Configurar o `.gitignore` conforme as ferramentas utilizadas.
-
+      
 **Modelagem do domínio**
 
 - [ ] Implementar todas as entidades previstas para o sistema.
@@ -224,15 +224,6 @@ Antes de implementar uma entidade, alinhar sua responsabilidade, seus relacionam
 
 O fluxo de branches e revisão será definido em conjunto.
 
-**Licença**
-
-A licença ainda não foi definida. Consulte esta seção e o arquivo `LICENSE`, quando disponibilizado, para verificar as condições de uso e distribuição.
 
 **Equipe**
-
-| Integrante | Responsabilidade |
-|---|---|
-| [Nome do integrante] | [Preencher] |
-| [Nome do integrante] | [Preencher] |
-
-**Sistema proposto na primeira entrega:** [Preencher com o nome ou referência da proposta.]
+Ervin Leite, Luiz Henrique e Luís Felipe Falcone
