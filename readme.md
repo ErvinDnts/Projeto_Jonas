@@ -93,7 +93,7 @@ Por exemplo, se o domínio possuir pedidos, ações como `confirmarPedido()` ou 
 | Mapeamento das entidades | Jakarta Persistence (JPA), com Spring Data JPA |
 | Provedor JPA | Hibernate, padrão do Spring Boot com Spring Data JPA |
 | Framework de aplicação | Spring Boot |
-| Ferramenta de build | Maven ou Gradle — a definir pela equipe |
+| Ferramenta de build | Maven |
 | Banco de dados | A definir, caso seja utilizado nesta etapa |
 | Modelagem UML | Ferramenta escolhida pela equipe |
 | Versionamento | Git e GitHub |
