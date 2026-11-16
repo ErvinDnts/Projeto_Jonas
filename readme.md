@@ -1,4 +1,4 @@
-**[Nome do projeto]**
+SISTEMA DE GERENCIAMENTO DE VENDAS E NEGÓCIOS
 
 [Descrever o sistema proposto na primeira entrega, seu público-alvo e o problema de negócio que pretende resolver.]
 
