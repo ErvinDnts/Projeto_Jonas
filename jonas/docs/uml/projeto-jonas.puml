@@ -1,0 +1,127 @@
+@startuml
+skinparam classAttributeIconSize 0
+hide circle
+
+class Cliente {
+  - id: Long
+  - nome: String
+  - telefone: String
+  - email: String
+  + Cliente(nome, telefone, email)
+  + atualizarContato(nome, telefone, email)
+}
+class Colaborador {
+  - id: Long
+  - nome: String
+  - perfil: PerfilColaborador
+  - ativo: boolean
+  + Colaborador(nome, perfil)
+  + alterarPerfil(executor, perfil)
+  + alterarNome(executor, nome)
+  + ativar(executor)
+  + desativar(executor)
+  + exigir(colaborador, perfil): void {static}
+}
+class Produto {
+  - id: Long
+  - nome: String
+  - descricao: String
+  - precoBase: BigDecimal
+  - ativo: boolean
+  + Produto(nome, descricao, precoBase)
+  + alterarPrecoBase(executor, preco)
+  + atualizar(executor, nome, descricao)
+  + desativar(executor)
+}
+class Pedido {
+  - id: Long
+  - codigoControle: UUID {readOnly}
+  - cliente: Cliente
+  - responsavel: Colaborador
+  - criadoEm: LocalDateTime {readOnly}
+  - dataEvento: LocalDate
+  - prazoEntrega: LocalDate
+  - status: StatusPedido
+  - observacoes: String
+  - motivoCancelamento: String
+  - canceladoEm: LocalDateTime
+  - canceladoPor: Colaborador
+  - pedidoOrigem: Pedido
+  - itens: List<ItemPedido>
+  - pagamentos: List<Pagamento>
+  + Pedido(executor, cliente, responsavel)
+  + adicionarItem(executor, produto, quantidade, personalizacao, material)
+  + removerItem(executor, item)
+  + alterarPrazo(executor, prazo)
+  + alterarDataEvento(executor, data)
+  + alterarObservacoes(executor, texto)
+  + confirmarPedido(executor)
+  + registrarPagamento(executor, valor, tipo, forma): Pagamento
+  + iniciarProducao(executor)
+  + marcarComoPronto(executor)
+  + entregarPedido(executor)
+  + cancelarPedido(executor, motivo)
+  + reabrirPedido(executor, evento, prazo): Pedido
+  + getTotal(): BigDecimal
+  + getTotalPago(): BigDecimal
+  + getSaldo(): BigDecimal
+  + getSinalMinimo(): BigDecimal
+  + prioridadeProducao(): Comparator<Pedido> {static}
+}
+class ItemPedido {
+  - id: Long
+  - pedido: Pedido
+  - produto: Produto
+  - quantidade: Integer
+  - precoUnitario: BigDecimal
+  - personalizacao: String
+  - material: String
+  - arte: Arte
+  + alterarQuantidade(executor, quantidade)
+  + alterarPersonalizacao(executor, texto)
+  + alterarMaterial(executor, material)
+  + anexarArte(executor, referencia, descricao): Arte
+  + getSubtotal(): BigDecimal
+}
+class Arte {
+  - id: Long
+  - itemPedido: ItemPedido
+  - referenciaArquivo: String
+  - descricao: String
+  - aprovada: boolean
+  - aprovadaEm: LocalDateTime
+  - atualizadaPor: Colaborador
+  - aprovadaPor: Colaborador
+  + atualizarArte(executor, referencia, descricao)
+  + aprovarArte(executor)
+}
+class Pagamento {
+  - id: Long
+  - pedido: Pedido
+  - valor: BigDecimal
+  - registradoEm: LocalDateTime
+  - tipo: TipoPagamento
+  - forma: FormaPagamento
+  - confirmadoPor: Colaborador
+}
+enum StatusPedido { RASCUNHO; CONFIRMADO; EM_PRODUCAO; PRONTO; ENTREGUE; CANCELADO }
+enum PerfilColaborador { ATENDIMENTO; FINANCEIRO_GESTAO; CRIACAO_ARTE; PRODUCAO_EXPEDICAO }
+enum TipoPagamento { SINAL; PARCIAL; QUITACAO }
+enum FormaPagamento { PIX; DINHEIRO; CARTAO; TRANSFERENCIA }
+
+Pedido "*" --> "1" Cliente : cliente
+Pedido "*" --> "1" Colaborador : responsavel
+Pedido "*" --> "0..1" Colaborador : canceladoPor
+Pedido "*" --> "0..1" Pedido : pedidoOrigem
+Pedido "1" *-- "0..*" ItemPedido : itens
+Pedido "1" *-- "0..*" Pagamento : pagamentos
+ItemPedido "*" --> "1" Produto : produto
+ItemPedido "1" *-- "0..1" Arte : arte
+Arte "*" --> "0..1" Colaborador : atualizadaPor
+Arte "*" --> "0..1" Colaborador : aprovadaPor
+Pagamento "*" --> "1" Colaborador : confirmadoPor
+Colaborador --> PerfilColaborador
+Pedido --> StatusPedido
+Pagamento --> TipoPagamento
+Pagamento --> FormaPagamento
+@enduml
