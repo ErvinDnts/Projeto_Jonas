@@ -103,4 +103,55 @@ class RegrasPedidoTest {
         assertTrue(reaberto.getPagamentos().isEmpty());
         assertNull(reaberto.getItens().get(0).getArte());
     }
+
+    @Test
+    void deveCriarPedidoEmRascunhoERejeitarResponsavelInativo() {
+        Pedido pedido = new Pedido(atendimento, cliente, atendimento);
+
+        assertEquals(StatusPedido.RASCUNHO, pedido.getStatus());
+        assertNotNull(pedido.getCodigoControle());
+        assertEquals(cliente, pedido.getCliente());
+        assertEquals(atendimento, pedido.getResponsavel());
+        assertTrue(pedido.getItens().isEmpty());
+
+        Colaborador inativo = new Colaborador("Carlos", PerfilColaborador.ATENDIMENTO);
+        inativo.desativar(financeiro);
+
+        assertThrows(IllegalArgumentException.class,
+                () -> new Pedido(atendimento, cliente, inativo));
+    }
+
+    @Test
+    void deveGerenciarItensDatasEObservacoesEmRascunho() {
+        Pedido pedido = new Pedido(atendimento, cliente, atendimento);
+        pedido.adicionarItem(atendimento, produto, 2, "Nome gravado", "ceramica");
+        pedido.alterarObservacoes(atendimento, "Entrega na recepcao");
+
+        ItemPedido item = pedido.getItens().get(0);
+        item.alterarPersonalizacao(atendimento, "Nome e data");
+        item.alterarMaterial(atendimento, "porcelana");
+
+        assertEquals(new BigDecimal("200.00"), pedido.getTotal());
+        assertEquals(new BigDecimal("100.00"), pedido.getSinalMinimo());
+        assertEquals("Nome e data", item.getPersonalizacao());
+        assertEquals("porcelana", item.getMaterial());
+        assertEquals("Entrega na recepcao", pedido.getObservacoes());
+
+        LocalDate evento = LocalDate.now().plusDays(10);
+        LocalDate prazoValido = LocalDate.now().plusDays(7);
+        LocalDate prazoInvalido = LocalDate.now().plusDays(12);
+
+        pedido.alterarDataEvento(atendimento, evento);
+        pedido.alterarPrazo(atendimento, prazoValido);
+        assertEquals(prazoValido, pedido.getPrazoEntrega());
+
+        assertThrows(IllegalArgumentException.class,
+                () -> pedido.alterarPrazo(atendimento, prazoInvalido));
+        assertThrows(IllegalArgumentException.class,
+                () -> pedido.alterarPrazo(atendimento, LocalDate.now().minusDays(1)));
+
+        pedido.removerItem(atendimento, item);
+        assertTrue(pedido.getItens().isEmpty());
+        assertEquals(new BigDecimal("0.00"), pedido.getTotal());
+    }
 }
